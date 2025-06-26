@@ -41,8 +41,7 @@ final class PluginBrigadierCommand extends Command implements PluginIdentifiable
     final String argsString = joined.isBlank() ? "" : " " + joined;
     ((CraftServer) Bukkit.getServer()).getServer().getCommands().performPrefixedCommand(
       VanillaCommandWrapper.getListener(sender),
-      commandLabel + argsString,
-      commandLabel
+      commandLabel + argsString
     );
     return true;
   }

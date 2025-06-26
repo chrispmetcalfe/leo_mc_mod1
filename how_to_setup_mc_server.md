@@ -5,10 +5,15 @@ This guide will help you set up everything you need to start "vibe coding" your 
 
 ## What You'll Need (with Download Links)
 
-1. **Java LATEST** - Required to run the server
+1. **Java LATEST (Java 17 or newer required, Java 21 recommended)**
    - [Download from Oracle](https://www.oracle.com/java/technologies/downloads/#jdk21-windows)
    - Choose "Windows x64 Installer"
    - Just click through the installer with default options
+   - **After installing, open a new terminal and run:**
+     ```
+     java -version
+     ```
+     It should say `java version "17..."` or `java version "21..."`. If it says `1.8...` or Java 8, see the troubleshooting section below to update your environment variables or uninstall old Java versions.
 
 2. **GitHub Desktop** - For downloading the project (no command line needed!)
    - [Download GitHub Desktop](https://desktop.github.com/)
@@ -41,9 +46,14 @@ This guide will help you set up everything you need to start "vibe coding" your 
 
 1. In Cursor, look for the file explorer on the left
 2. Find and double-click `gradlew.bat`
-3. A black window (terminal) will open - this is normal!
-4. Type: `runServer` and press Enter
-5. **Wait patiently** - First time setup downloads everything needed (5-10 minutes)
+3. A black window (terminal) will open and then close immediately—this is normal! This step does **not** start the server, it just prepares Gradle for use.
+4. **Next, open a new terminal in Cursor (or VS Code, etc.) in your project folder.**
+5. In the new terminal, type:
+   ```
+   .\gradlew.bat runServer
+   ```
+   (If you're on Mac/Linux, use `./gradlew runServer`)
+6. **Wait patiently** - First time setup downloads everything needed (5-10 minutes)
 
 The server will stop and ask you to accept the EULA.
 
@@ -107,11 +117,28 @@ Let's make a simple change to see it work:
 
 ## Troubleshooting
 
+### Java 8 or Wrong Java Version Detected
+If you see an error like:
+```
+Dependency requires at least JVM runtime version 17. This build uses a Java 8 JVM.
+```
+Or if `java -version` shows Java 8 (`1.8.0_xxx`), you need to update your system to use Java 17 or newer:
+
+1. **Uninstall old Java versions:**
+   - Open "Add or Remove Programs" (Windows key, search for it)
+   - Search for "Java" and uninstall any Java 8 or older entries
+2. **Set JAVA_HOME and update your Path:**
+   - Open "Edit the system environment variables" > "Environment Variables"
+   - Set `JAVA_HOME` to your new JDK path (e.g., `C:\Program Files\Java\jdk-21`)
+   - In the `Path` variable, remove any lines pointing to old Java versions and add/move the new JDK's `bin` folder to the top
+3. **Restart your computer and open a new terminal**
+4. Run `java -version` again to confirm it shows Java 17 or 21
+
 ### "Outdated Server" Error
 Your Minecraft version doesn't match. Check the server window for the version (like "1.21.6") and switch to that version in the Minecraft launcher.
 
 ### Server Won't Start
-- Make sure you installed Java 21
+- Make sure you installed Java 21 (see above)
 - Check that you saved the EULA file after changing it to true
 - Try closing and reopening the terminal window
 
